@@ -1,8 +1,9 @@
 "use client";
 
 // Setup page: make a Brick, get your key, then follow the steps to connect
-// your iPhone. The key is shown once and also saved in this browser so the
-// dashboard can find it.
+// your iPhone. Blocking runs entirely on the phone; the key only links the
+// phone to the online dashboard. It's shown once and also saved in this
+// browser so the dashboard can find it.
 
 import { useState } from "react";
 
@@ -73,14 +74,17 @@ export default function Setup() {
       <p className="eyebrow">MTC Brick</p>
       <h1>Brick your phone with an NFC tag</h1>
       <p className="muted">
-        Tap your tag to block distracting apps. Tap again to unlock. Free, and nothing to
-        install but two shortcuts. iPhone only.
+        Tap your tag to block distracting apps. Tap again to unlock. Free, works without
+        internet, and nothing to install but two shortcuts. iPhone only.
       </p>
 
       {!key ? (
         <form className="card" onSubmit={create}>
           <h2>1. Make your Brick</h2>
-          <p className="muted">Just a first name or nickname, so your dashboard can greet you.</p>
+          <p className="muted">
+            This sets up your online dashboard for focus time and streaks. Just a first name
+            or nickname, so it can greet you.
+          </p>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -100,8 +104,8 @@ export default function Setup() {
           <div className="card dark">
             <h2>Your Brick key</h2>
             <p className="muted">
-              This is like a password for your Brick. You'll paste it into both shortcuts.
-              It's only shown once, so copy it now.
+              This is like a password for your dashboard. You'll paste it into the Brick
+              Toggle shortcut. It's only shown once, so copy it now.
             </p>
             <span className="key">{key}</span>
             <button type="button" onClick={copyKey}>
@@ -111,7 +115,9 @@ export default function Setup() {
 
           <div className="card">
             <h2>2. Add the two shortcuts</h2>
-            <p className="muted">Open these on your iPhone. When asked, paste your key.</p>
+            <p className="muted">
+              Open these on your iPhone. When Brick Toggle asks, paste your key.
+            </p>
             <ol className="steps">
               <li>
                 <ShortcutLink url={TOGGLE_SHORTCUT_URL} label="Add “Brick Toggle”" />: locks

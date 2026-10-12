@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "MTC Brick",
-  description: "Brick your iPhone with an NFC tag. Free, no app install.",
+  description: "Brick your iPhone with an NFC tag.",
 };
 
 export default function RootLayout({ children }) {

@@ -139,6 +139,9 @@ export default function Dashboard() {
             <p>Tap your tag to start focusing.</p>
           </>
         )}
+        <p className="muted">
+          Updates when you tap your tag with internet. Your Brick works offline either way.
+        </p>
       </div>
 
       <div className="row">
