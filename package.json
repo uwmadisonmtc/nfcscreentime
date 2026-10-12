@@ -1,0 +1,17 @@
+{
+  "name": "mtc-brick",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Brick your iPhone with an NFC tag and Apple Shortcuts. Free, no app install.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.3",
+    "next": "^16.4.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}
