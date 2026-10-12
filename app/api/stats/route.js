@@ -1,22 +1,21 @@
-// GET /api/stats   header: x-brick-key: brk_...
+// GET /api/stats   (signed in)
 // Powers the dashboard: current status, focus time today, streak, sessions.
 
 import { NextResponse } from "next/server";
-import { keyFromRequest } from "../../../lib/keys";
+import { signedInBrickId } from "../../../lib/auth";
 import { brickStats } from "../../../lib/store";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request) {
-  const key = keyFromRequest(request);
-  if (!key) {
-    return NextResponse.json({ error: "Missing or invalid Brick key." }, { status: 401 });
-  }
-
   try {
-    const stats = await brickStats(key);
+    const brickId = await signedInBrickId(request);
+    if (!brickId) {
+      return NextResponse.json({ error: "Not signed in." }, { status: 401 });
+    }
+    const stats = await brickStats(brickId);
     if (!stats) {
-      return NextResponse.json({ error: "Unknown Brick key." }, { status: 404 });
+      return NextResponse.json({ error: "Not signed in." }, { status: 401 });
     }
     return NextResponse.json(stats, { headers: { "Cache-Control": "no-store" } });
   } catch (err) {

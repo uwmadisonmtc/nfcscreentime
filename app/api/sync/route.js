@@ -1,4 +1,4 @@
-// POST /api/sync   header: x-brick-key: brk_...   body: { "state": "bricked" | "unlocked" }
+// POST /api/sync   header: x-brick-key: <sync code>   body: { "state": "bricked" | "unlocked" }
 // Called last by the "Brick Toggle" shortcut, after the phone has already
 // locked or unlocked itself. This only updates the dashboard, so if it fails
 // (no internet, server paused) blocking still works.
@@ -12,7 +12,7 @@ const STATES = { bricked: true, unlocked: false };
 export async function POST(request) {
   const key = keyFromRequest(request);
   if (!key) {
-    return NextResponse.json({ error: "Missing or invalid Brick key." }, { status: 401 });
+    return NextResponse.json({ error: "Missing or invalid sync code." }, { status: 401 });
   }
 
   const body = await request.json().catch(() => ({}));
@@ -28,7 +28,7 @@ export async function POST(request) {
   try {
     const result = await setBrickState(key, STATES[state]);
     if (!result) {
-      return NextResponse.json({ error: "Unknown Brick key." }, { status: 404 });
+      return NextResponse.json({ error: "Unknown sync code." }, { status: 404 });
     }
     return NextResponse.json(result);
   } catch (err) {

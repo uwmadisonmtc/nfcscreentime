@@ -7,3 +7,6 @@ out/
 .env*.local
 .DS_Store
 npm-debug.log*
+
+# Design references (other people's images, not ours to publish)
+inspo/
